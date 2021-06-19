@@ -162,15 +162,12 @@ app.delete("/api/student/:id", (req, res) => {
   var id = req.params.id;
   // console.log(req.params.id);
   // console.log(Student.findIndex(id));
-  var stud = Student.filter((stud) => {
-    return stud.id == id;
-  });
-  if (!stud[0]) {
-    res.send(404);
+  var index = Student.findIndex(x=>x.id == id);
+  
+  if (index=-1) {
+    res.status(404).send();
   } else {
-    Student = Student.filter((stud) => {
-      return stud.id != id;
-    });
+    delete Student[index]
     // console.log(Student);
     res.send(200);
   }
